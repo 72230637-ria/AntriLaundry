@@ -1,64 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+AntriLaundry adalah sistem manajemen laundry berbasis web yang dibangun menggunakan framework Laravel untuk membantu pelanggan melakukan pemesanan laundry, memantau status laundry secara realtime.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Teknologi yang Digunakan : Laravel 10, PHP 8, MySQL, Bootstrap 5, Mailtrap SMTP.
 
-## About Laravel
+Tampilan home :
+<img width="1917" height="1015" alt="Cuplikan layar 2026-06-12 201400" src="https://github.com/user-attachments/assets/240200c9-71e8-4b97-9842-c9d1ad57ca55" />
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+tampilan saat melakukan registrasi akun untuk mengecek ASVS email verification :
+setelah input dan melakukan klik tombol daftar sekarang,  email  verifikasi akan otomatis dikirimkan  ke email yang digunakan registrasi
+<img width="1608" height="991" alt="Cuplikan layar 2026-06-12 202018" src="https://github.com/user-attachments/assets/6c2e61f7-727d-4184-948e-f7a9cc20c104" />
+<img width="957" height="731" alt="Cuplikan layar 2026-06-12 202350" src="https://github.com/user-attachments/assets/14f0785a-dbe0-40af-9574-77c975d695f6" />
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+untuk ujicoba verifikasi email digunakan mailtrap :
+<img width="1919" height="922" alt="Cuplikan layar 2026-06-12 205701" src="https://github.com/user-attachments/assets/29fa105d-42f0-4601-aa30-4de2dc1805c3" />
 
-## Learning Laravel
+jika akun yang registrasi tidak melakukan verifikasi email maka tidak akan bisa login ke sistem meskipun telah memasukkan password yang  benar saat proses registrasi : 
+<img width="1919" height="847" alt="Cuplikan layar 2026-06-12 204906" src="https://github.com/user-attachments/assets/2d6d2595-9896-481f-9afd-efe2ef83e90e" />
+tampilan akan tetap berada pada halaman login seperti ini sampai user melakukan verifikasi email :
+<img width="1917" height="785" alt="Cuplikan layar 2026-06-12 203139" src="https://github.com/user-attachments/assets/93b33877-59fe-4a5e-bffc-509ec6ea4515" />
+karena hanya akun terverifikasi yang hanya boleh mengakses dashboard jadi jika tidak memverifikasi email maka di basis data laundry, tabel email_verified_at akan NULL dan  tabel remember_token akan NULL juga karena token hanya terisi saat user  login ke sistem  untuk mendapatkan role sebagai pelanggan yang dapat akses dashboard  :
+<img width="1589" height="170" alt="Cuplikan layar 2026-06-12 203019" src="https://github.com/user-attachments/assets/c7f4ca77-f296-413c-b363-17b9ba26e5a7" />
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+ jika user langsung melakukan verifikasi email maka otomatis diarahkan untuk melakukan login sebelum benar-benar masuk ke dashboard akun :
+<img width="1919" height="847" alt="Cuplikan layar 2026-06-12 204906" src="https://github.com/user-attachments/assets/10ee17ca-678e-4d46-a415-10d600c09ffe" />
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+setelah itu user dapat mengakses halaman dashboard akun :
+<img width="1917" height="852" alt="Cuplikan layar 2026-06-12 205127" src="https://github.com/user-attachments/assets/b8f9169f-d192-45da-8bcd-85061e28f8b2" />
 
-## Laravel Sponsors
+hal ini terjadi karena saat melakukan klik verfikasi maka otomatis tabel verified_at akan terisi berdasarkan jam,tanggal dan tahun verifikasi email begitupun dengan tabel  remember_token akan terisi sehingga saat akun klik login akan masuk ke halaman dashboard karena mendapat hak akses dengan role sebagai pelanggan :
+<img width="1732" height="171" alt="Cuplikan layar 2026-06-12 210442" src="https://github.com/user-attachments/assets/52e798f0-8aed-4a69-b5b8-845990e02362" />
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+begitupun jika user lupa password maka email reset password akan dikirim ke email yang digunakan registrasi :
+<img width="1808" height="721" alt="Cuplikan layar 2026-06-12 204316" src="https://github.com/user-attachments/assets/9a5272ae-e982-4c63-b6bc-ca8fd282eeaa" />
+seteleh itu user akan menerima link reset password(mailtrap) untuk mengganti password baru:
+<img width="1913" height="955" alt="Cuplikan layar 2026-06-12 204620" src="https://github.com/user-attachments/assets/d2cbdbfc-d64b-4e6e-a2a6-35a4f54864f8" />
+<img width="1919" height="983" alt="Cuplikan layar 2026-06-12 204819" src="https://github.com/user-attachments/assets/f8a7cae8-2737-41f2-ac48-bbf57753859b" />
+setelah reset akan otomatis diarahkan ke halaman login :
+<img width="1919" height="847" alt="Cuplikan layar 2026-06-12 204906" src="https://github.com/user-attachments/assets/09a5a171-e8f6-4b53-9bb0-5e8fbd6d7c81" />
+jika reset password dan proses login berhasil maka user akan bisa kembali ke menu dashboard seperti biasa :
+<img width="1917" height="852" alt="Cuplikan layar 2026-06-12 205127" src="https://github.com/user-attachments/assets/07fac5d7-851b-47f8-b9f0-f3be206abb35" />
 
-### Premium Partners
+password yang diinputkan oleh user  juga tidak disimpan dalam bentuk plain text tetapi dalam bentuk hashing(bcrypt) sehingga jika database diretas password tidak akan terbaca dengan mudah :
+<img width="1732" height="171" alt="Cuplikan layar 2026-06-12 210442" src="https://github.com/user-attachments/assets/972e79fa-cbd6-4477-b6c9-ac80729e7a53" />
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Hanya akun pelanggan yang sudah verifikasi email yang boleh mengakses sistem dashboard akun pelanggan(ASVS middleware auth), sehingga siapa pun yang mencoba akses dashboard dengan mengganti route sperti gambar dibawah akan diarahkan ke halaman login.
+<img width="1916" height="980" alt="image" src="https://github.com/user-attachments/assets/376749a2-f93f-4cc3-9d45-f473dde0579a" />
+saat klik enter maka akan otomatis ke halaman login bukan dashboard tanpa kecuali akun yang sudah register tapi tidak verifikasi email :
+<img width="1484" height="786" alt="Cuplikan layar 2026-06-12 201839" src="https://github.com/user-attachments/assets/c42192e5-8a5b-4a33-814e-9c4c3a51eeca" />
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+
+
